@@ -155,7 +155,7 @@ app.post('/spend', jsonparser, (req, res) => {
     modifyMoney(currentUser, parseInt(req.body.amount) * -1)
 
     if (req.body.amount > 0) {
-        addHistory(req.body.amount, currentUser, req.body.vendor, "Spent: " + req.body.description)
+        addHistory(req.body.amount, currentUser, req.body.vendor, "Payment: " + req.body.description)
     }
 
     res.end()
