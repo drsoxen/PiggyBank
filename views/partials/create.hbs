@@ -1,0 +1,114 @@
+<div class="quests">
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#Reward" role="tab"
+                        aria-controls="home" aria-selected="true">Reward</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Quest" role="tab"
+                        aria-controls="profile" aria-selected="false">Quest</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Tip" role="tab"
+                        aria-controls="contact" aria-selected="false">Tip</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="Reward" role="tabpanel" aria-labelledby="reward-tab">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4">
+                            <div class="card text-center">
+                                <div class="form-group" style="margin: 10px;">
+                                    <input type="text" class="form-control" id="formRewardName" placeholder="Name">
+                                    <textarea class="form-control" id="formRewardDescription" rows="3"
+                                        placeholder="Description"></textarea>
+                                    <input type="text" class="form-control" id="formRewardAmount" placeholder="Amount">
+                                    <div>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal"
+                                            onclick=sendReward()>Create</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Quest" role="tabpanel" aria-labelledby="queste-tab">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4">
+                            <div class="card text-center">
+                                <div class="form-group" style="margin: 10px;">
+                                    <input type="text" class="form-control" id="formQuestName" placeholder="Name">
+                                    <textarea class="form-control" id="formQuestDescription" rows="3"
+                                        placeholder="Description"></textarea>
+                                    <input type="text" class="form-control" id="formQuestAmount" placeholder="Amount">
+                                    <div class="form-row justify-content-center">
+                                        <div class="form-group col-md-6">
+                                            <select class="form-control" id="formQuestFrom">
+                                                <option selected>From...</option>
+                                                {{#each users}}
+                                                <option>{{this.username}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <select class="form-control" id="formQuestTo">
+                                                <option selected>To...</option>
+                                                {{#each users}}
+                                                <option>{{this.username}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal"
+                                            onclick=sendQuest()>Create</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Tip" role="tabpanel" aria-labelledby="tip-tab">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4">
+                            <div class="card text-center">
+                                <div class="form-group" style="margin: 10px;">
+                                    <input type="text" class="form-control" id="formTipAmount" placeholder="Amount">
+                                    <textarea class="form-control" id="formTipDescription" rows="3"
+                                        placeholder="Description"></textarea>
+                                    <div class="form-row justify-content-center">
+                                        <div class="form-group col-md-6">
+                                            <select class="form-control" id="formTipFrom">
+                                                <option selected>From...</option>
+                                                {{#each users}}
+                                                <option>{{this.username}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <select class="form-control" id="formTipTo">
+                                                <option selected>To...</option>
+                                                {{#each users}}
+                                                <option>{{this.username}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal"
+                                            onclick=sendTip()>Send</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

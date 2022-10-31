@@ -1,0 +1,54 @@
+<div class="rewards">
+    <div class="row justify-content-center">
+        {{#each rewards}}
+        <div class="col-lg-3" style="margin-top: 50px;">
+            <div class="card text-center">
+
+                <div class="card-body">
+                    <h5 class="mb-1">{{restrictSize this.name}}</h5>
+                    </br>
+                    <div class="d-flex w-100 justify-content-between">
+                        <a href="#" class="btn btn-outline-secondary" data-toggle="modal"
+                        data-target="#rewardsModal{{@index}}">Details</a>
+                        <button class="btn float-right"><i class="fa-solid fa-star"
+                                style="color:rgb(255, 208, 0);"></i></button>
+                    </div>
+                    {{!-- if is star fav need inject that into json when sending here --}}
+                    {{!-- else not lit up --}}
+                    {{!-- <button class="btn"><i class="fa-regular fa-star"></i></button> --}}
+
+
+
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="rewardsModal{{@index}}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-light">
+                        <h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5 class="card-title">{{this.name}}</h5>
+                        </br>
+                        <h5 class="card-description">{{this.description}}</h5>
+                        </br>
+                        <h5 class="card-reward">Reward: {{this.reward}}</h5>
+                    </div>
+                    <div class="modal-footer bg-light">
+                        <button type="button" class="btn btn-success" data-dismiss="modal"
+                            onclick=postMsg('claimReward',{{this.id}})>Claim Reward</button>
+                        <button type="button" class="btn  btn-outline-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1666905175,
+        "name": "Load the Dishwasher",
+        "description": "Eww gross dishes. Put them in the dishwasher",
+        "reward": 5
+    },
+    {
+        "id": 1666905174,
+        "name": "Unload the Dishwasher",
+        "description": "Ding! Dishes are clean. Please put them away",
+        "reward": 5
+    },
+    {
+        "id": 1666922541,
+        "name": "Put on Laundry",
+        "description": "You need clean clothes you filthy animal!",
+        "reward": 1
+    }
+]
