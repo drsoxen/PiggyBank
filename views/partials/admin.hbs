@@ -44,7 +44,10 @@
                                         <option>{{this.username}}</option>
                                         {{/each}}
                                     </select>
-                                    <input type="text" class="form-control" id="formManagementAmount" placeholder="Amount">
+                                    <input type="text" class="form-control" id="formManagementAmount"
+                                        placeholder="Amount">
+                                    <textarea class="form-control" id="formManagementDescription" rows="3"
+                                        placeholder="Description"></textarea>
                                     <div class="d-flex justify-content-between gap-4">
                                         <button type="button" class="btn btn-success w-50" data-dismiss="modal"
                                             onclick=sendModification(true)>Add</button>

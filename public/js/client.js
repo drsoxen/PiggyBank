@@ -1,3 +1,7 @@
+function reloadPage() {
+    document.location.reload();
+}
+
 // Fetches message from server via GET
 function getMsg() {
     // Creates a promise object for retrieving the desired data
@@ -25,13 +29,12 @@ function postMsg(endpoint, data) {
         body: JSON.stringify(data),
     })
         .then(() => {
-            document.location.reload();
+            reloadPage();
         })
         .catch((error) => {
             console.error('Error:', error);
         });
 
-        document.location.reload();
 }
 
 function sendReward() {
@@ -49,7 +52,7 @@ function sendReward() {
         body: JSON.stringify(data),
     })
         .then(() => {
-            document.location.reload();
+            reloadPage();
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -73,7 +76,7 @@ function sendQuest() {
         body: JSON.stringify(data),
     })
         .then(() => {
-            document.location.reload();
+            reloadPage();
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -96,7 +99,7 @@ function sendTip() {
         body: JSON.stringify(data),
     })
         .then(() => {
-            document.location.reload();
+            reloadPage();
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -118,7 +121,7 @@ function sendPayment() {
         body: JSON.stringify(data),
     })
         .then(() => {
-            document.location.reload();
+            reloadPage();
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -131,6 +134,7 @@ function sendModification(action) {
 
     let data = {}
     data.account = document.getElementById("formManagementFrom").value
+    data.description = document.getElementById("formManagementDescription").value
     data.amount = amount
 
     // Creates a promise object for sending the desired data
@@ -142,7 +146,7 @@ function sendModification(action) {
         body: JSON.stringify(data),
     })
         .then(() => {
-            document.location.reload();
+            reloadPage();
         })
         .catch((error) => {
             console.error('Error:', error);

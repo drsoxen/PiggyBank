@@ -163,7 +163,7 @@ app.post('/payment', jsonparser, (req, res) => {
 
 app.post('/modification', jsonparser, (req, res) => {
     modifyMoney(req.body.account, req.body.amount)
-    addHistory(req.body.amount, "Management", req.body.account, "Management")
+    addHistory(req.body.amount, "Management", req.body.account, "Management: " + req.body.description)
 
     res.end()
 });
