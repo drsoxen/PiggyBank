@@ -26,10 +26,10 @@ app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-let usersPath = './users.json';
-let questsPath = './quests.json';
-let rewardsPath = './rewards.json';
-let historyPath = './history.json';
+let usersPath = './public/json/users.json';
+let questsPath = './public/json/quests.json';
+let rewardsPath = './public/json/rewards.json';
+let historyPath = './public/json/history.json';
 
 let currentUser;
 let allUsers;
