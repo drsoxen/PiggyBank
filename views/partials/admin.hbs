@@ -1,0 +1,63 @@
+<div class="admin">
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#History" role="tab"
+                        aria-controls="home" aria-selected="true">History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="management-tab" data-toggle="tab" href="#Management" role="tab"
+                        aria-controls="management" aria-selected="false">Management</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="History" role="tabpanel" aria-labelledby="history-tab">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="card text-left">
+                                {{#each history}}
+                                <div class="list-group">
+                                    <a class="list-group-item flex-column align-items-start">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">{{this.reason}}</h5>
+                                            <small>{{this.timestamp}}</small>
+                                        </div>
+                                        ${{this.amount}} - {{this.from}} -> {{this.to}}
+                                    </a>
+                                </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Management" role="tabpanel" aria-labelledby="management-tab">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4">
+                            <div class="card text-center">
+                                <div class="form-group" style="margin: 10px;">
+                                    <select class="form-control" id="formManagementFrom">
+                                        <option selected>Account...</option>
+                                        {{#each users}}
+                                        <option>{{this.username}}</option>
+                                        {{/each}}
+                                    </select>
+                                    <input type="text" class="form-control" id="formManagementAmount" placeholder="Amount">
+                                    <div class="d-flex justify-content-between gap-4">
+                                        <button type="button" class="btn btn-success w-50" data-dismiss="modal"
+                                            onclick=sendModification(true)>Add</button>
+
+                                        <button type="button" class="btn btn-danger w-50" data-dismiss="modal"
+                                            onclick=sendModification(false)>Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

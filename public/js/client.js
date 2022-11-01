@@ -103,14 +103,38 @@ function sendTip() {
         });        
 }
 
-function sendSpend() {
+function sendPayment() {
     let data = {}
     data.amount = document.getElementById("formSpendAmount").value
     data.vendor = document.getElementById("formVendorAmount").value
     data.description = document.getElementById("formSpendDescription").value
 
     // Creates a promise object for sending the desired data
-    fetch("http://192.168.1.66:3000/spend", {
+    fetch("http://192.168.1.66:3000/payment", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(() => {
+            document.location.reload();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });        
+}
+
+function sendModification(action) {
+
+    let amount = action ? parseInt(document.getElementById("formManagementAmount").value) : parseInt(document.getElementById("formManagementAmount").value) * -1
+
+    let data = {}
+    data.account = document.getElementById("formManagementFrom").value
+    data.amount = amount
+
+    // Creates a promise object for sending the desired data
+    fetch("http://192.168.1.66:3000/modification", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

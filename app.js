@@ -150,13 +150,20 @@ app.post('/createTip', jsonparser, (req, res) => {
     res.end()
 });
 
-app.post('/spend', jsonparser, (req, res) => {
+app.post('/payment', jsonparser, (req, res) => {
 
     modifyMoney(currentUser, parseInt(req.body.amount) * -1)
 
     if (req.body.amount > 0) {
         addHistory(req.body.amount, currentUser, req.body.vendor, "Payment: " + req.body.description)
     }
+
+    res.end()
+});
+
+app.post('/modification', jsonparser, (req, res) => {
+    modifyMoney(req.body.account, req.body.amount)
+    addHistory(req.body.amount, "Management", req.body.account, "Management")
 
     res.end()
 });
