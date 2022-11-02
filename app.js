@@ -56,11 +56,7 @@ app.get('/', function (req, res) {
     user.starRewards.forEach(function (value, i) {
         rewards.push(allRewards.filter(x => x.id === value)[0])
         rewards.at(-1).starred = true
-        //allRewards.splice(allRewards.findIndex(x => x.id === value, 1))
     });
-
-    
-   // console.log(allRewards)
 
     allRewards.forEach(function (value, i) {
         if(!value.hasOwnProperty('starred'))
