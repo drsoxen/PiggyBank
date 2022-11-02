@@ -152,3 +152,23 @@ function sendModification(action) {
             console.error('Error:', error);
         });        
 }
+
+function sendToggleStar(id) {
+    let data = {}
+    data.id = id
+
+    // Creates a promise object for sending the desired data
+    fetch("http://192.168.1.66:3000/toggleStar", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(() => {
+            reloadPage();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });        
+}

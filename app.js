@@ -52,12 +52,31 @@ app.get('/', function (req, res) {
     });
 
     allRewards = JSON.parse(fs.readFileSync(rewardsPath).toString());
+    let rewards = []
+    user.starRewards.forEach(function (value, i) {
+        rewards.push(allRewards.filter(x => x.id === value)[0])
+        rewards.at(-1).starred = true
+        //allRewards.splice(allRewards.findIndex(x => x.id === value, 1))
+    });
+
+    
+   // console.log(allRewards)
+
+    allRewards.forEach(function (value, i) {
+        if(!value.hasOwnProperty('starred'))
+        {
+        value.starred = false
+        rewards.push(value)
+        }
+    });
+
+    console.log(rewards)
 
     res.render('home', {
         user: user,
         users: allUsers,
         quests: quests,
-        rewards: allRewards,
+        rewards: rewards,
         history: allHistory
     });
 });
@@ -164,6 +183,23 @@ app.post('/payment', jsonparser, (req, res) => {
 app.post('/modification', jsonparser, (req, res) => {
     modifyMoney(req.body.account, req.body.amount)
     addHistory(req.body.amount, "Management", req.body.account, "Management: " + req.body.description)
+
+    res.end()
+});
+
+app.post('/toggleStar', jsonparser, (req, res) => {
+
+    let user = allUsers.find(x => x.username == currentUser)
+
+    if (user.starRewards.includes(req.body.id)) {
+        let removeStar = user.starRewards.findIndex(x => x === req.body.id)
+        user.starRewards.splice(removeStar, 1)
+    }
+    else {
+        user.starRewards.push(req.body.id)
+    }
+
+    fs.writeFileSync(usersPath, JSON.stringify(allUsers));
 
     res.end()
 });

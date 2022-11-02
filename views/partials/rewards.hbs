@@ -10,8 +10,11 @@
                     <div class="d-flex w-100 justify-content-between">
                         <a href="#" class="btn btn-outline-secondary" data-toggle="modal"
                         data-target="#rewardsModal{{@index}}">Details</a>
-                        <button class="btn float-right"><i class="fa-solid fa-star"
-                                style="color:rgb(255, 208, 0);"></i></button>
+                        {{#if this.starred}}
+                        <button class="btn float-right fa-solid fa-star" style="color:rgb(255, 208, 0);" onclick=sendToggleStar({{this.id}})></button>
+                        {{else}}
+                        <button class="btn float-right fa-regular fa-star" style="color:black" onclick=sendToggleStar({{this.id}})></button>
+                        {{/if}}
                     </div>
                     {{!-- if is star fav need inject that into json when sending here --}}
                     {{!-- else not lit up --}}
