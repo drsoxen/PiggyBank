@@ -53,20 +53,19 @@ app.get('/', function (req, res) {
 
     allRewards = JSON.parse(fs.readFileSync(rewardsPath).toString());
     let rewards = []
-    user.starRewards.forEach(function (value, i) {
-        rewards.push(allRewards.filter(x => x.id === value)[0])
-        rewards.at(-1).starred = true
-    });
-
     allRewards.forEach(function (value, i) {
-        if(!value.hasOwnProperty('starred'))
-        {
-        value.starred = false
-        rewards.push(value)
+        let copyObj = Object.assign({}, value);
+        if (user.starRewards.includes(copyObj.id)) {
+            
+            copyObj.starred = true
+            rewards.unshift(copyObj)
+            
         }
+        else {
+            copyObj.starred = false
+            rewards.push(copyObj)
+        }        
     });
-
-    console.log(rewards)
 
     res.render('home', {
         user: user,
