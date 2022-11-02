@@ -15,14 +15,7 @@
                         {{else}}
                         <button class="btn float-right fa-regular fa-star" style="color:black" onclick=sendToggleStar({{this.id}})></button>
                         {{/if}}
-                    </div>
-                    {{!-- if is star fav need inject that into json when sending here --}}
-                    {{!-- else not lit up --}}
-                    {{!-- <button class="btn"><i class="fa-regular fa-star"></i></button> --}}
-
-
-
-                    
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -45,8 +38,9 @@
                         <h5 class="card-reward">Reward: ${{this.reward}}</h5>
                     </div>
                     <div class="modal-footer bg-light">
+                        <input type="number" value="1" min="1" max="10" step="1" id="formRewardMultiplier{{this.id}}" class="mr-auto"/>
                         <button type="button" class="btn btn-success" data-dismiss="modal"
-                            onclick=postMsg('claimReward',{{this.id}})>Claim Reward</button>
+                            onclick=claimReward({{this.id}})>Claim Reward</button>
                         <button type="button" class="btn  btn-outline-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>

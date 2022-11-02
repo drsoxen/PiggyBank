@@ -2,26 +2,34 @@ function reloadPage() {
     document.location.reload();
 }
 
-// Fetches message from server via GET
-function getMsg() {
-    // Creates a promise object for retrieving the desired data
-    fetch("http://192.168.1.66:3000/api")
-        // When recieved, exposes the JSON component
-        .then((response) => {
-            return response.json();
-        })
-        // Displays the message on the page
-        .then((json) => {
-            new_msg = "Server message: " + json.msg
-            document.getElementById("msg").innerHTML = new_msg;
-        });
-}
-// Sends message to server via POST
-function postMsg(endpoint, data) {
-    data = { data: data }
+function claimReward(id) {
+    let data = {}
+    data.id = id
+    data.multiplier = document.getElementById('formRewardMultiplier' + id).value;
 
     // Creates a promise object for sending the desired data
-    fetch("http://192.168.1.66:3000/" + endpoint, {
+    fetch("http://192.168.1.66:3000/claimReward", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(() => {
+            reloadPage();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+}
+
+function completeQuest(id) {
+    let data = {}
+    data.id = id
+
+    // Creates a promise object for sending the desired data
+    fetch("http://192.168.1.66:3000/completeQuest", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -56,7 +64,7 @@ function sendReward() {
         })
         .catch((error) => {
             console.error('Error:', error);
-        });        
+        });
 }
 
 function sendQuest() {
@@ -80,7 +88,7 @@ function sendQuest() {
         })
         .catch((error) => {
             console.error('Error:', error);
-        });        
+        });
 }
 
 function sendTip() {
@@ -103,7 +111,7 @@ function sendTip() {
         })
         .catch((error) => {
             console.error('Error:', error);
-        });        
+        });
 }
 
 function sendPayment() {
@@ -125,7 +133,7 @@ function sendPayment() {
         })
         .catch((error) => {
             console.error('Error:', error);
-        });        
+        });
 }
 
 function sendModification(action) {
@@ -150,7 +158,7 @@ function sendModification(action) {
         })
         .catch((error) => {
             console.error('Error:', error);
-        });        
+        });
 }
 
 function sendToggleStar(id) {
@@ -170,5 +178,5 @@ function sendToggleStar(id) {
         })
         .catch((error) => {
             console.error('Error:', error);
-        });        
+        });
 }

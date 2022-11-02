@@ -77,7 +77,7 @@ app.get('/', function (req, res) {
 });
 
 app.post('/completeQuest', jsonparser, (req, res) => {
-    id = req.body.data
+    id = req.body.id
 
     let quest = allQuests.find(x => x.id == id)
 
@@ -103,14 +103,16 @@ app.post('/completeQuest', jsonparser, (req, res) => {
 });
 
 app.post('/claimReward', jsonparser, (req, res) => {
-    id = req.body.data
+    id = req.body.id  
 
     let reward = allRewards.find(x => x.id == id)
 
-    modifyMoney(currentUser, reward.reward)
-    modifyMoney("Bank", reward.reward * -1)
+    let multipliedAmount = reward.reward * req.body.multiplier
 
-    addHistory(reward.reward, "Bank", currentUser, "Reward: " + reward.name)
+    modifyMoney(currentUser, multipliedAmount)
+    modifyMoney("Bank", multipliedAmount * -1)
+
+    addHistory(multipliedAmount, "Bank", currentUser, "Reward: " + reward.name)
 
     res.end()
 });
