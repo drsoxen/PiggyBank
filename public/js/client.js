@@ -8,7 +8,7 @@ function claimReward(id) {
     data.multiplier = document.getElementById('formRewardMultiplier' + id).value;
 
     // Creates a promise object for sending the desired data
-    fetch("http://piggy-bank-drsoxen.herokuapp.com/claimReward", {
+    fetch("https://piggy-bank-drsoxen.herokuapp.com/claimReward", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ function completeQuest(id) {
     data.id = id
 
     // Creates a promise object for sending the desired data
-    fetch("http://piggy-bank-drsoxen.herokuapp.com/completeQuest", {
+    fetch("https://piggy-bank-drsoxen.herokuapp.com/completeQuest", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ function sendReward() {
     data.amount = document.getElementById("formRewardAmount").value
 
     // Creates a promise object for sending the desired data
-    fetch("http://piggy-bank-drsoxen.herokuapp.com/createReward", {
+    fetch("https://piggy-bank-drsoxen.herokuapp.com/createReward", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ function sendQuest() {
     data.to = document.getElementById("formQuestTo").value
 
     // Creates a promise object for sending the desired data
-    fetch("http://piggy-bank-drsoxen.herokuapp.com/createQuest", {
+    fetch("https://piggy-bank-drsoxen.herokuapp.com/createQuest", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ function sendTip() {
     data.to = document.getElementById("formTipTo").value
 
     // Creates a promise object for sending the desired data
-    fetch("http://piggy-bank-drsoxen.herokuapp.com/createTip", {
+    fetch("https://piggy-bank-drsoxen.herokuapp.com/createTip", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ function sendPayment() {
     data.description = document.getElementById("formSpendDescription").value
 
     // Creates a promise object for sending the desired data
-    fetch("http://piggy-bank-drsoxen.herokuapp.com/payment", {
+    fetch("https://piggy-bank-drsoxen.herokuapp.com/payment", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -146,7 +146,7 @@ function sendModification(action) {
     data.amount = amount
 
     // Creates a promise object for sending the desired data
-    fetch("http://piggy-bank-drsoxen.herokuapp.com/modification", {
+    fetch("https://piggy-bank-drsoxen.herokuapp.com/modification", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -166,7 +166,7 @@ function sendToggleStar(id) {
     data.id = id
 
     // Creates a promise object for sending the desired data
-    fetch("http://piggy-bank-drsoxen.herokuapp.com/toggleStar", {
+    fetch("https://piggy-bank-drsoxen.herokuapp.com/toggleStar", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
