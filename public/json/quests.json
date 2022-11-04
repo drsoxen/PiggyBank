@@ -1,18 +1,3 @@
 [
-    {
-        "id": 1666905392,
-        "name": "Put up curtain rod in the livingroom",
-        "description": "Don't want the neighbourhood to see your bum!",
-        "reward": 5,
-        "rewardFrom": "Bank",
-        "rewardTo": "Chris"
-    },
-    {
-        "id": 1666922710,
-        "name": "Fix van hose",
-        "description": "Morgarath destroyed the hose",
-        "reward": 10,
-        "rewardFrom": "Bank",
-        "rewardTo": "Chris"
-    }
+
 ]

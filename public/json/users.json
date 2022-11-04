@@ -1,24 +1,19 @@
 [
     {
         "username": "Bank",
-        "amount": 837,
+        "amount": 0,
         "quests": [],
         "starRewards": []
     },
     {
         "username": "Chris",
-        "amount": 300,
-        "quests": [
-            1666905392,
-            1666922710
-        ],
-        "starRewards": [
-            1666905175
-        ]
+        "amount": 0,
+        "quests": [],
+        "starRewards": []
     },
     {
         "username": "Sarah",
-        "amount": 430,
+        "amount": 0,
         "quests": [],
         "starRewards": []
     }
