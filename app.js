@@ -237,6 +237,6 @@ let addHistory = (amount, from, to, reason) => {
 
 }
 
-app.listen(80, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('The web server has started on port 3000');
 });
