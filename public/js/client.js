@@ -1,3 +1,7 @@
+window.addEventListener('load', (event) => {
+    console.log('page is fully loaded');
+  });
+
 function reloadPage() {
     document.location.reload();
 }
