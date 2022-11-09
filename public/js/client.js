@@ -1,5 +1,5 @@
 //let host = "https://piggy-bank-drsoxen.herokuapp.com"
-let host = "http://localhost:3000"
+let host = "http://raspberrypi.local:3000"
 
 window.addEventListener('load', (event) => {
     console.log('page is fully loaded');
