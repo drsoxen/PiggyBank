@@ -5,6 +5,7 @@ Handlebars = require('handlebars');
 const bodyparser = require('body-parser')
 const jsonparser = bodyparser.json()
 const path = require('path')
+const favicon = require('serve-favicon');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.engine('hbs', exphbs({
 app.set('view engine', 'hbs');
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 let usersPath = './public/json/users.json';
 let questsPath = './public/json/quests.json';
