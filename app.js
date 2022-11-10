@@ -148,7 +148,7 @@ app.post('/createQuest', jsonparser, (req, res) => {
 
     fs.writeFileSync(questsPath, JSON.stringify(allQuests));
 
-    let user = allUsers.find(x => x.username == currentUser)
+    let user = allUsers.find(x => x.username == data.rewardTo)
     if (user) {
         user.quests.push(data.id)
     }
