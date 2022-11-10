@@ -33,7 +33,6 @@ let questsPath = './public/json/quests.json';
 let rewardsPath = './public/json/rewards.json';
 let historyPath = './public/json/history.json';
 
-let currentUser;
 let allUsers;
 let allQuests;
 let allRewards;
@@ -86,7 +85,7 @@ app.post('/completeQuest', jsonparser, (req, res) => {
     modifyMoney(quest.rewardTo, quest.reward)
     modifyMoney(quest.rewardFrom, quest.reward * -1)
 
-    let user = allUsers.find(x => x.username == currentUser)
+    let user = allUsers.find(x => x.username == req.body.username)
     if (user) {
         let index = user.quests.findIndex(x => x == id)
         user.quests.splice(index, 1)
@@ -111,10 +110,10 @@ app.post('/claimReward', jsonparser, (req, res) => {
 
     let multipliedAmount = reward.reward * req.body.multiplier
 
-    modifyMoney(currentUser, multipliedAmount)
+    modifyMoney(req.body.username, multipliedAmount)
     modifyMoney("Bank", multipliedAmount * -1)
 
-    addHistory(multipliedAmount, "Bank", currentUser, "Reward: " + reward.name)
+    addHistory(multipliedAmount, "Bank", req.body.username, "Reward: " + reward.name)
 
     res.end()
 });
@@ -170,10 +169,10 @@ app.post('/createTip', jsonparser, (req, res) => {
 
 app.post('/payment', jsonparser, (req, res) => {
 
-    modifyMoney(currentUser, parseInt(req.body.amount) * -1)
+    modifyMoney(req.body.username, parseInt(req.body.amount) * -1)
 
     if (req.body.amount > 0) {
-        addHistory(req.body.amount, currentUser, req.body.vendor, "Payment: " + req.body.description)
+        addHistory(req.body.amount, req.body.username, req.body.vendor, "Payment: " + req.body.description)
     }
 
     res.end()
@@ -188,7 +187,7 @@ app.post('/modification', jsonparser, (req, res) => {
 
 app.post('/toggleStar', jsonparser, (req, res) => {
 
-    let user = allUsers.find(x => x.username == currentUser)
+    let user = allUsers.find(x => x.username == req.body.username)
 
     if (user.starRewards.includes(req.body.id)) {
         let removeStar = user.starRewards.findIndex(x => x === req.body.id)

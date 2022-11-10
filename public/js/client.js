@@ -1,9 +1,12 @@
 //let host = "https://piggy-bank-drsoxen.herokuapp.com"
 let host = "http://raspberrypi.local:3000"
+let username;
 
 window.addEventListener('load', (event) => {
-    console.log('page is fully loaded');
-  });
+    username = document.getElementById("clientjs").getAttribute("username");
+
+    console.log('page is fully loaded with user: ' + username);
+});
 
 function reloadPage() {
     document.location.reload();
@@ -11,6 +14,7 @@ function reloadPage() {
 
 function claimReward(id) {
     let data = {}
+    data.username = username
     data.id = id
     data.multiplier = document.getElementById('formRewardMultiplier' + id).value;
 
@@ -33,6 +37,7 @@ function claimReward(id) {
 
 function completeQuest(id) {
     let data = {}
+    data.username = username
     data.id = id
 
     // Creates a promise object for sending the desired data
@@ -54,6 +59,7 @@ function completeQuest(id) {
 
 function sendReward() {
     let data = {}
+    data.username = username
     data.name = document.getElementById("formRewardName").value
     data.description = document.getElementById("formRewardDescription").value
     data.amount = document.getElementById("formRewardAmount").value
@@ -76,6 +82,7 @@ function sendReward() {
 
 function sendQuest() {
     let data = {}
+    data.username = username
     data.name = document.getElementById("formQuestName").value
     data.description = document.getElementById("formQuestDescription").value
     data.amount = document.getElementById("formQuestAmount").value
@@ -100,6 +107,7 @@ function sendQuest() {
 
 function sendTip() {
     let data = {}
+    data.username = username
     data.amount = document.getElementById("formTipAmount").value
     data.description = document.getElementById("formTipDescription").value
     data.from = document.getElementById("formTipFrom").value
@@ -123,6 +131,7 @@ function sendTip() {
 
 function sendPayment() {
     let data = {}
+    data.username = username
     data.amount = document.getElementById("formSpendAmount").value
     data.vendor = document.getElementById("formVendorAmount").value
     data.description = document.getElementById("formSpendDescription").value
@@ -148,6 +157,7 @@ function sendModification(action) {
     let amount = action ? parseInt(document.getElementById("formManagementAmount").value) : parseInt(document.getElementById("formManagementAmount").value) * -1
 
     let data = {}
+    data.username = username
     data.account = document.getElementById("formManagementFrom").value
     data.description = document.getElementById("formManagementDescription").value
     data.amount = amount
@@ -170,6 +180,7 @@ function sendModification(action) {
 
 function sendToggleStar(id) {
     let data = {}
+    data.username = username
     data.id = id
 
     // Creates a promise object for sending the desired data
