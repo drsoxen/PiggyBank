@@ -57,15 +57,15 @@ app.get('/', function (req, res) {
     allRewards.forEach(function (value, i) {
         let copyObj = Object.assign({}, value);
         if (user.starRewards.includes(copyObj.id)) {
-            
+
             copyObj.starred = true
             rewards.unshift(copyObj)
-            
+
         }
         else {
             copyObj.starred = false
             rewards.push(copyObj)
-        }        
+        }
     });
 
     res.render('home', {
@@ -104,7 +104,7 @@ app.post('/completeQuest', jsonparser, (req, res) => {
 });
 
 app.post('/claimReward', jsonparser, (req, res) => {
-    id = req.body.id  
+    id = req.body.id
 
     let reward = allRewards.find(x => x.id == id)
 
