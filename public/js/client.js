@@ -8,11 +8,11 @@ window.addEventListener('load', (event) => {
     console.log('page is fully loaded with user: ' + username);
 });
 
-function reloadPage() {
+let reloadPage = () => {
     document.location.reload();
 }
 
-function claimReward(id) {
+let claimReward = (id) => {
     let data = {}
     data.username = username
     data.id = id
@@ -35,7 +35,7 @@ function claimReward(id) {
 
 }
 
-function completeQuest(id) {
+let completeQuest = (id) => {
     let data = {}
     data.username = username
     data.id = id
@@ -57,7 +57,7 @@ function completeQuest(id) {
 
 }
 
-function sendReward() {
+let sendReward = () => {
     let data = {}
     data.username = username
     data.name = document.getElementById("formRewardName").value
@@ -80,7 +80,7 @@ function sendReward() {
         });
 }
 
-function sendQuest() {
+let sendQuest = () => {
     let data = {}
     data.username = username
     data.name = document.getElementById("formQuestName").value
@@ -105,7 +105,7 @@ function sendQuest() {
         });
 }
 
-function sendTip() {
+let sendTip = () => {
     let data = {}
     data.username = username
     data.amount = document.getElementById("formTipAmount").value
@@ -129,7 +129,7 @@ function sendTip() {
         });
 }
 
-function sendPayment() {
+let sendPayment = () => {
     let data = {}
     data.username = username
     data.amount = document.getElementById("formSpendAmount").value
@@ -152,7 +152,7 @@ function sendPayment() {
         });
 }
 
-function sendModification(action) {
+let sendModification = (action) => {
 
     let amount = action ? parseInt(document.getElementById("formManagementAmount").value) : parseInt(document.getElementById("formManagementAmount").value) * -1
 
@@ -178,7 +178,7 @@ function sendModification(action) {
         });
 }
 
-function sendToggleStar(id) {
+let sendToggleStar = (id) => {
     let data = {}
     data.username = username
     data.id = id
