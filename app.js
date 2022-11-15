@@ -98,7 +98,7 @@ app.post('/completeQuest', jsonparser, (req, res) => {
 
     fs.writeFileSync(questsPath, JSON.stringify(allQuests));
 
-    addHistory(quest.reward, quest.rewardFrom, quest.rewardTo, "Quest: " + quest.name)
+    addHistory(quest.reward, quest.rewardFrom, quest.rewardTo, "Quest", quest.name)
 
     res.end()
 });
@@ -113,7 +113,7 @@ app.post('/claimReward', jsonparser, (req, res) => {
     modifyMoney(req.body.username, multipliedAmount)
     modifyMoney("Bank", multipliedAmount * -1)
 
-    addHistory(multipliedAmount, "Bank", req.body.username, "Reward: " + reward.name)
+    addHistory(multipliedAmount, "Bank", req.body.username, "Reward", reward.name)
 
     res.end()
 });
@@ -162,7 +162,7 @@ app.post('/createTip', jsonparser, (req, res) => {
     modifyMoney(req.body.to, parseInt(req.body.amount))
     modifyMoney(req.body.from, parseInt(req.body.amount) * -1)
 
-    addHistory(req.body.amount, req.body.from, req.body.to, "Tip: " + req.body.description)
+    addHistory(req.body.amount, req.body.from, req.body.to, "Tip", req.body.description)
 
     res.end()
 });
@@ -172,7 +172,7 @@ app.post('/payment', jsonparser, (req, res) => {
     modifyMoney(req.body.username, parseInt(req.body.amount) * -1)
 
     if (req.body.amount > 0) {
-        addHistory(req.body.amount, req.body.username, req.body.vendor, "Payment: " + req.body.description)
+        addHistory(req.body.amount, req.body.username, req.body.vendor, "Payment", req.body.description)
     }
 
     res.end()
@@ -180,7 +180,7 @@ app.post('/payment', jsonparser, (req, res) => {
 
 app.post('/modification', jsonparser, (req, res) => {
     modifyMoney(req.body.account, req.body.amount)
-    addHistory(req.body.amount, "Management", req.body.account, "Management: " + req.body.description)
+    addHistory(req.body.amount, "Management", req.body.account, "Management", req.body.description)
 
     res.end()
 });
@@ -213,7 +213,7 @@ let modifyMoney = (username, value) => {
     }
 }
 
-let addHistory = (amount, from, to, reason) => {
+let addHistory = (amount, from, to, type, reason) => {
 
     let date = new Date()
     var hours = date.getHours();
@@ -230,6 +230,7 @@ let addHistory = (amount, from, to, reason) => {
     data.amount = amount;
     data.from = from;
     data.to = to;
+    data.type = type;
     data.reason = reason
 
     allHistory.unshift(data)
