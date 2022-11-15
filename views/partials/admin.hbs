@@ -10,6 +10,10 @@
                     <a class="nav-link" id="management-tab" data-toggle="tab" href="#Management" role="tab"
                         aria-controls="management" aria-selected="false">Management</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="reports-tab" data-toggle="tab" href="#Reports" role="tab"
+                        aria-controls="reports" aria-selected="false">Reports</a>
+                </li>
             </ul>
         </div>
         <div class="card-body">
@@ -58,6 +62,15 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Reports" role="tabpanel" aria-labelledby="reports-tab">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-4">
+                            <p>Select Date Range</p>
+                            <input type="text" name="daterange"/>
+                        </div>
+                        <canvas id="myChart" style="width:100%"></canvas>
                     </div>
                 </div>
             </div>

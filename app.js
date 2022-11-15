@@ -202,6 +202,16 @@ app.post('/toggleStar', jsonparser, (req, res) => {
     res.end()
 });
 
+app.post('/generateReport', jsonparser, (req, res) => {
+
+    let data = {}
+
+    console.log("A new date range was chosen: " + req.body.startDate + ' to ' + req.body.endDate)
+
+    res.end()
+});
+
+
 let modifyMoney = (username, value) => {
     if (value) {
         let user = allUsers.find(x => x.username == username)

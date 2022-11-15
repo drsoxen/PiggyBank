@@ -198,3 +198,55 @@ let sendToggleStar = (id) => {
             console.error('Error:', error);
         });
 }
+
+$('input[name="daterange"]').daterangepicker(
+    {
+        autoApply: true,
+        "opens": "center",
+        locale: {
+            firstDay: 0
+        }
+    },
+    function (start, end) {
+        let data = {}
+        data.startDate = start.format('YYYY-MM-DD')
+        data.endDate = end.format('YYYY-MM-DD')
+
+        fetch(host + "/generateReport", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(() => {
+                var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+                var yValues = [55, 49, 44, 24, 15];
+                var barColors = ["red", "green", "blue", "orange", "brown"];
+
+                new Chart("myChart", {
+                    type: "bar",
+                    //type: "doughnut",
+                    data: {
+                        labels: xValues,
+                        datasets: [{
+                            backgroundColor: barColors,
+                            data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: "World Wine Production 2018"
+                        }
+                    }
+                });
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+
+
+
