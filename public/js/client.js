@@ -219,7 +219,10 @@ $('input[name="daterange"]').daterangepicker(
             },
             body: JSON.stringify(data),
         })
-            .then(() => {
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data.test)
+                
                 var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
                 var yValues = [55, 49, 44, 24, 15];
                 var barColors = ["red", "green", "blue", "orange", "brown"];

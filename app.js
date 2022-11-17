@@ -205,10 +205,11 @@ app.post('/toggleStar', jsonparser, (req, res) => {
 app.post('/generateReport', jsonparser, (req, res) => {
 
     let data = {}
+    data.test = "testing"
 
-    console.log("A new date range was chosen: " + req.body.startDate + ' to ' + req.body.endDate)
+    //console.log("A new date range was chosen: " + req.body.startDate + ' to ' + req.body.endDate)
 
-    res.end()
+    res.send(data)
 });
 
 
