@@ -124,7 +124,7 @@ app.post('/createReward', jsonparser, (req, res) => {
     data.id = Math.round((new Date()).getTime() / 1000);
     data.name = req.body.name;
     data.description = req.body.description;
-    data.reward = parseInt(req.body.amount);
+    data.reward = Number(req.body.amount);
 
     allRewards.push(data)
 
@@ -139,7 +139,7 @@ app.post('/createQuest', jsonparser, (req, res) => {
     data.id = Math.round((new Date()).getTime() / 1000);
     data.name = req.body.name;
     data.description = req.body.description;
-    data.reward = parseInt(req.body.amount);
+    data.reward = Number(req.body.amount);
     data.rewardFrom = req.body.from;
     data.rewardTo = req.body.to;
 
@@ -159,8 +159,8 @@ app.post('/createQuest', jsonparser, (req, res) => {
 
 app.post('/createTip', jsonparser, (req, res) => {
 
-    modifyMoney(req.body.to, parseInt(req.body.amount))
-    modifyMoney(req.body.from, parseInt(req.body.amount) * -1)
+    modifyMoney(req.body.to, Number(req.body.amount))
+    modifyMoney(req.body.from, Number(req.body.amount) * -1)
 
     addHistory(req.body.amount, req.body.from, req.body.to, "Tip", req.body.description)
 
@@ -169,7 +169,7 @@ app.post('/createTip', jsonparser, (req, res) => {
 
 app.post('/payment', jsonparser, (req, res) => {
 
-    modifyMoney(req.body.username, parseInt(req.body.amount) * -1)
+    modifyMoney(req.body.username, Number(req.body.amount) * -1)
 
     if (req.body.amount > 0) {
         addHistory(req.body.amount, req.body.username, req.body.vendor, "Payment", req.body.description)
