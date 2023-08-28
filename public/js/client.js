@@ -199,6 +199,9 @@ let sendToggleStar = (id) => {
         });
 }
 
+// Define the chart variable outside the callback function
+let userChart = null;
+
 $('input[name="daterange"]').daterangepicker(
     {
         autoApply: true,
@@ -208,6 +211,9 @@ $('input[name="daterange"]').daterangepicker(
         }
     },
     function (start, end) {
+        // Clear userAmounts to start fresh
+        const userAmounts = {};
+
         let data = {}
         data.startDate = start.format('YYYY-MM-DD')
         data.endDate = end.format('YYYY-MM-DD')
@@ -221,35 +227,71 @@ $('input[name="daterange"]').daterangepicker(
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data.test)
-                
-                var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-                var yValues = [55, 49, 44, 24, 15];
-                var barColors = ["red", "green", "blue", "orange", "brown"];
+                // Process the data to calculate total amounts for each user
+                data.forEach(item => {
+                    const user = item.to;
+                    const amount = parseFloat(item.amount);
 
-                new Chart("myChart", {
-                    type: "bar",
-                    //type: "doughnut",
-                    data: {
-                        labels: xValues,
-                        datasets: [{
-                            backgroundColor: barColors,
-                            data: yValues
-                        }]
-                    },
-                    options: {
-                        legend: { display: false },
-                        title: {
-                            display: true,
-                            text: "World Wine Production 2018"
+                    // Exclude transactions involving "Bank" and "Management"
+                    if (!isNaN(amount)) {
+                        if (!userAmounts[user]) {
+                            userAmounts[user] = 0;
                         }
+                        userAmounts[user] += amount;
                     }
                 });
+
+                // Extract user names and corresponding amounts for the chart
+                const xValues = Object.keys(userAmounts);
+                const yValues = Object.values(userAmounts);
+
+                // Update the existing chart with new data
+                if (userChart) {
+                    userChart.data.labels = xValues;
+                    userChart.data.datasets[0].data = yValues;
+                    userChart.update();
+                } else {
+                    // Create the initial chart
+                    userChart = new Chart("myChart", {
+                        type: "bar",
+                        data: {
+                            labels: xValues,
+                            datasets: [{
+                                backgroundColor: "green", // You can set colors here
+                                data: yValues
+                            }]
+                        },
+                        options: {
+                            legend: { display: false },
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: "Users"
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: "Amount"
+                                    }
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: "User Transaction Amounts"
+                            }
+                        }
+                    });
+                }
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
-    });
+    }
+);
+
+
 
 
 

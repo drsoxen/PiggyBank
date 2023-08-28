@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars');
 const fs = require('fs');
 Handlebars = require('handlebars');
 const bodyparser = require('body-parser')
+const { parse, setHours, setMinutes, setSeconds, setMilliseconds } = require('date-fns');
 const jsonparser = bodyparser.json()
 const path = require('path')
 const favicon = require('serve-favicon');
@@ -203,13 +204,30 @@ app.post('/toggleStar', jsonparser, (req, res) => {
 });
 
 app.post('/generateReport', jsonparser, (req, res) => {
+    // Extract start and end date from the request body
+    const startDate = parse(req.body.startDate, 'yyyy-M-d', new Date());
+    let endDate = parse(req.body.endDate, 'yyyy-M-d', new Date());
 
-    let data = {}
-    data.test = "testing"
+    endDate = setHours(endDate, 23);
+    endDate = setMinutes(endDate, 59);
+    endDate = setSeconds(endDate, 59);
+    endDate = setMilliseconds(endDate, 999);
 
-    //console.log("A new date range was chosen: " + req.body.startDate + ' to ' + req.body.endDate)
+    // Filter valid items based on date range
+    const validItems = allHistory.filter(item => {
+        const timestamp = parse(item.timestamp, 'M/d/yyyy  h:mmaaa', new Date());
+        return timestamp >= startDate && timestamp <= endDate;
+    });
 
-    res.send(data)
+    const filteredUsers = allUsers.filter(user => user.username !== "Bank");
+
+    // Filter and sort valid items to include only transactions with "to" field corresponding to a user from filteredUsers
+    const filteredItems = validItems.filter(item => {
+        return filteredUsers.some(user => user.username === item.to);
+    });
+
+    // Send back the filtered valid items
+    res.json(filteredItems);
 });
 
 
